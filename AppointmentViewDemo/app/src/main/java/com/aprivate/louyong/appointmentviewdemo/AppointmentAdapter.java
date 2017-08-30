@@ -58,7 +58,7 @@ class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.DayView
     @Override
     public void onBindViewHolder(final DayViewHolder holder, final int position) {
         holder.title.setText(getItem(position).getTitle());
-        holder.abutton.setEnabled(false);
+        holder.abutton.setEnabled(true);
         holder.fbutton.setEnabled(false);
     }
 

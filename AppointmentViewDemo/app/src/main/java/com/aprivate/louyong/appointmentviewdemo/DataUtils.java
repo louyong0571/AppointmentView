@@ -113,14 +113,16 @@ public class DataUtils {
     /**
      * 获取今天往后一周的日期（年-月-日）
      */
-    public static List<String> get7date() {
+    public static List<String> getDateStrings(boolean includeToday, int length) {
         List<String> dates = new ArrayList<String>();
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         java.text.SimpleDateFormat sim = new java.text.SimpleDateFormat("yyyy-MM-dd");
         String date = sim.format(c.getTime());
-        dates.add(date);
-        for (int i = 0; i < 6; i++) {
+        if (includeToday) {
+            dates.add(date);
+        }
+        for (int i = 0; i < length; i++) {
             c.add(java.util.Calendar.DAY_OF_MONTH, 1);
             date = sim.format(c.getTime());
             dates.add(date);
@@ -131,17 +133,20 @@ public class DataUtils {
     /**
      * 获取今天往后一周的日期（几月几号）
      */
-    public static List<String> getSevendate() {
+    public static List<String> getDateStringWithoutYear(boolean includeToday, int length) {
         List<String> dates = new ArrayList<String>();
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
 
-        for (int i = 0; i < 7; i++) {
-            mYear = String.valueOf(c.get(Calendar.YEAR));// 获取当前年份
+        for (int i = 0; i < length; i++) {
             mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
             mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH) + i);// 获取当前日份的日期号码
             String date = mMonth + "月" + mDay + "日";
-            dates.add(date);
+            if (i == 0 && includeToday) {
+                dates.add(date);
+            } else {
+                dates.add(date);
+            }
         }
         return dates;
     }
@@ -149,10 +154,10 @@ public class DataUtils {
     /**
      * 获取今天往后一周的集合
      */
-    public static List<String> get7week() {
+    public static List<String> getWeekStrings() {
         String week = "";
         List<String> weeksList = new ArrayList<String>();
-        List<String> dateList = get7date();
+        List<String> dateList = getDateStrings(false, 14);
         for (String s : dateList) {
             if (s.equals(StringData())) {
                 week = "今天";
@@ -162,5 +167,15 @@ public class DataUtils {
             weeksList.add(week);
         }
         return weeksList;
+    }
+
+    public static List<String> getDateAndWeekStrings(boolean includeToday, int lenth) {
+        List<String> dateAndWeekList = new ArrayList<String>();
+        List<String> dateList = getDateStrings(includeToday, lenth);
+        for (String s : dateList) {
+            String dateAndWeek = s.substring(5, s.length()) + "\n" + getWeek(s);
+            dateAndWeekList.add(dateAndWeek);
+        }
+        return dateAndWeekList;
     }
 }

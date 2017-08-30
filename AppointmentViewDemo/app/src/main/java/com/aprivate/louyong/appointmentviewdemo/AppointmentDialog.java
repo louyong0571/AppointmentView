@@ -30,7 +30,7 @@ public class AppointmentDialog extends DialogFragment{
         mAppointmentAdapter = new AppointmentAdapter(getActivity());
         mDaylist = (RecyclerView) v.findViewById(R.id.day_list);
         List<DayEntity> list = new ArrayList<>();
-        List<String> dayWeeks = DataUtils.get7week();
+        List<String> dayWeeks = DataUtils.getDateAndWeekStrings(false, 14);
 
         for(String str : dayWeeks) {
             DayEntity dE =  new DayEntity();
