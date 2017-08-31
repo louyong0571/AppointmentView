@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -74,14 +73,14 @@ class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.DayView
     class DayViewHolder extends RecyclerView.ViewHolder {
 
         private TextView title;
-        private Button abutton;
-        private Button fbutton;
+        private TextView abutton;
+        private TextView fbutton;
 
         public DayViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
-            abutton = (Button) itemView.findViewById(R.id.appoint);
-            fbutton = (Button) itemView.findViewById(R.id.full);
+            abutton = (TextView) itemView.findViewById(R.id.appoint);
+            fbutton = (TextView) itemView.findViewById(R.id.full);
         }
     }
 }
